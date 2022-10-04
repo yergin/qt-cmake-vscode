@@ -1,0 +1,5 @@
+<RCC version="1.0">
+	<qresource prefix="images/">
+		<file>melodica.png</file>
+	</qresource>
+</RCC>
