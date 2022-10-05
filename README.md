@@ -49,7 +49,7 @@ Customising the app
 
 Set your application name, version, source files and other information in `cmake/AppInfo.cmake`.
 
-To change the application icon, replace the `*.ico` (Windows) and `*.icns` (macOS) files in the `resources` folder, setting `ICON_NAME` to the base file name (without the file extension) in `AppInfo.cmake`. The macOS utility script `macos\png2ico.sh` generates `ICO` and `ICNS` files from a `PNG`, should you need it.
+To change the application icon, replace the `*.ico` (Windows) and `*.icns` (macOS) files in the `resources` folder, setting `ICON_NAME` to the base file name (without the file extension) in `AppInfo.cmake`. The macOS utility script `macos\png2ico.sh` generates `ICO` and `ICNS` files from a `PNG`, should you need it. There are many online tools which convert uploaded images into icons, such as [this one](https://redketchup.io/icon-converter).
 
 If developing a macOS agent (a.k.a. service or deamon) which must run without a task bar icon, set `MACOSX_IS_AGENT` to `TRUE` in `AppInfo.cmake`.
 
