@@ -5,7 +5,7 @@
 ##  Created by Gino Bollaert on 04/10/2022.
 ##
 
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.24)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 include(app)
 
@@ -34,6 +34,7 @@ if (APPLE)
         resources/${ICON_NAME}.icns
     )
 elseif (WIN32)
+    set(QT6_DIR c:/Qt/6.4.0/mingw_64)
     set(ICON_FILE resources/${ICON_NAME})
     set(RESOURCE_FILES
         resources/resources.qrc
@@ -48,13 +49,20 @@ include_directories(${QT6_DIR}/lib)
 qt_standard_project_setup()
 set(CMAKE_AUTORCC ON)
 
-add_executable(${TARGET_NAME} MACOSX_BUNDLE ${SOURCE_FILES} ${RESOURCE_FILES})
+add_executable(${TARGET_NAME} ${SOURCE_FILES} ${RESOURCE_FILES})
 foreach(LIB ${QT_COMPONENTS})
     target_link_libraries(${TARGET_NAME} PRIVATE Qt6::${LIB})
 endforeach(LIB)
 
-if (IS_AGENT)
-    add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
-        COMMAND /bin/bash ${CMAKE_CURRENT_SOURCE_DIR}/scripts/macos/plist-agent.sh ${CMAKE_CURRENT_SOURCE_DIR}/build/${TARGET_NAME}.app/Contents/Info.plist
-    )
+set_target_properties(${TARGET_NAME} PROPERTIES
+    WIN32_EXECUTABLE ON
+    MACOSX_BUNDLE ON
+)
+
+if (APPLE)
+    if (IS_AGENT)
+        add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
+            COMMAND /bin/bash ${CMAKE_CURRENT_SOURCE_DIR}/scripts/macos/plist-agent.sh ${CMAKE_CURRENT_SOURCE_DIR}/build/${TARGET_NAME}.app/Contents/Info.plist
+        )
+    endif()
 endif()
