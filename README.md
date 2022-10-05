@@ -39,7 +39,7 @@ Deployment
 ----------
 
 1. Select the 'Release' build variant in the status bar.
-2. Click on \[Template\] to change the default build target to 'install'
+2. Click on \[Template\] to change the default build target to \[install\]
 3. Press 'Build' in the status bar.
 
 The `build/dist` folder will contain the distributable app.
