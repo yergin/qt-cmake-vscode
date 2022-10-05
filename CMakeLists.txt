@@ -32,15 +32,15 @@ if (APPLE)
     set(MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION})
     set(MACOSX_BUNDLE_COPYRIGHT ${COPYRIGHT})
     set(MACOSX_BUNDLE_GUI_IDENTIFIER ${IDENTIFIER})
-    set(MACOSX_BUNDLE_ICON_FILE ${ICON_NAME})
+    set(MACOSX_BUNDLE_ICON_FILE ${ICON_NAME}.icns)
     set(RESOURCE_FILES
         resources/resources.qrc
-        resources/${ICON_NAME}.icns
+        ${ICON_FILE}
     )
 elseif (WIN32)
     enable_language(RC)
     set(ICON_FILE resources/${ICON_NAME})
-    configure_file(${PROJECT_SOURCE_DIR}/windows/resources.rc.in resources.rc @ONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/windows/resources.rc.in resources.rc @ONLY)
     set(RESOURCE_FILES
         resources/resources.qrc
         resources.rc
@@ -65,28 +65,39 @@ set_target_properties(${TARGET_NAME} PROPERTIES
     MACOSX_BUNDLE ON
 )
 
+set(BUILD_DIR ${PROJECT_SOURCE_DIR}/build)
+
 if (APPLE)
     if (MACOSX_IS_AGENT)
         add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
-            COMMAND /bin/bash ${CMAKE_CURRENT_SOURCE_DIR}/macos/plist-agent.sh ${CMAKE_CURRENT_SOURCE_DIR}/build/${TARGET_NAME}.app/Contents/Info.plist
+            COMMAND /bin/bash ${CMAKE_SOURCE_DIR}/macos/plist-agent.sh ${BUILD_DIR}/${TARGET_NAME}.app/Contents/Info.plist
         )
     endif()
 elseif(WIN32)
     # We need the DLLs normally copied during deployment in order to debug in VSCode
     add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
-        COMMAND ${QT6_DIR}/bin/windeployqt.exe ${CMAKE_CURRENT_SOURCE_DIR}/build/${TARGET_NAME}.exe
+        COMMAND ${QT6_DIR}/bin/windeployqt.exe ${BUILD_DIR}/${TARGET_NAME}.exe
     )
 endif()
 
-set(DIST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/dist)
+set(DIST_DIR ${BUILD_DIR}/dist)
+set(BUILT_APP ${BUILD_DIR}/${APP_NAME}.app)
+set(DIST_APP ${DIST_DIR}/${APP_NAME}.app)
 set(CMAKE_INSTALL_PREFIX ${DIST_DIR})
-install(TARGETS ${TARGET_NAME}
-    BUNDLE DESTINATION .
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
-qt_generate_deploy_app_script(
-    TARGET ${TARGET_NAME}
-    FILENAME_VARIABLE deploy_script
-    NO_UNSUPPORTED_PLATFORM_ERROR
-)
-install(SCRIPT ${deploy_script})
+
+if (APPLE)
+    # Qt's deploy script is broken for Mac so run the command-line version instead
+    configure_file(${CMAKE_SOURCE_DIR}/macos/mac-deploy.sh.in mac-deploy.sh @ONLY)
+    install(SCRIPT ${CMAKE_SOURCE_DIR}/macos/PostInstall.cmake)
+elseif(WIN32)
+    install(TARGETS ${TARGET_NAME}
+        BUNDLE DESTINATION .
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    )
+    qt_generate_deploy_app_script(
+        TARGET ${TARGET_NAME}
+        FILENAME_VARIABLE deploy_script
+        NO_UNSUPPORTED_PLATFORM_ERROR
+    )
+    install(SCRIPT ${deploy_script})
+endif()

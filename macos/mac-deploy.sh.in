@@ -1,0 +1,15 @@
+#!/bin/bash
+
+##
+##  mac-deploy.sh
+##  qt6-cmake-vscode
+##
+##  Created by Gino Bollaert on 04/10/2022.
+##
+
+[ -d "@DIST_DIR@" ] && rm -r "@DIST_DIR@"
+mkdir "@DIST_DIR@"
+cp -R "@BUILT_APP@" "@DIST_DIR@"
+
+@QT6_DIR@/bin/macdeployqt "@DIST_APP@"
+ln -s ./Frameworks "@DIST_APP@/Contents/lib"
