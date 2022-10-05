@@ -39,7 +39,7 @@ if (APPLE)
     )
 elseif (WIN32)
     enable_language(RC)
-    set(ICON_FILE resources/${ICON_NAME})
+    set(ICON_FILE resources/${ICON_NAME}.ico)
     configure_file(${CMAKE_SOURCE_DIR}/windows/resources.rc.in resources.rc @ONLY)
     set(RESOURCE_FILES
         resources/resources.qrc

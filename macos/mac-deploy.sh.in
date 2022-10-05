@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-##  mac-deploy.sh
+##  mac-deploy.sh.in
 ##  qt6-cmake-vscode
 ##
 ##  Created by Gino Bollaert on 04/10/2022.
