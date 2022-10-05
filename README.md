@@ -19,9 +19,11 @@ Dev requirements
 Setting up
 ----------
 
-If you are on Windows, before following the steps below, Add Qt's MinGW bin folder to the system's PATH environment variable. For Qt 6.4.0, the MinGW bin folder is located at:
+If you are on Windows, before following the steps below, add Qt's MinGW bin folder to the system's PATH environment variable. For Qt 6.4.0, the MinGW bin folder is located at:
 
 `C:\Qt\Tools\mingw1120_64\bin`
+
+Set up the project in VSCode:
 
 1. Open VSCode and select "Open Folder..." from the file menu.
 2. Select the root folder of this repo.
@@ -31,7 +33,7 @@ If you are on Windows, before following the steps below, Add Qt's MinGW bin fold
     * Clang on macOS
     * MinGW on Windows
 
-You are now ready to build, run or debug the app in VSCode
+You are now ready to build, run or debug the app. The app can be found in the `build` directory, however, this build is unlikely to run on another machine. To distribute the app, follow the steps in the following section.
 
 Deployment
 ----------
@@ -45,11 +47,11 @@ The `build/dist` folder will contain the distributable app.
 Customising the app
 -------------------
 
-The application name, version, source files and other app-specific information is specified in `cmake/AppInfo.cmake`.
+Set your application name, version, source files and other information in `cmake/AppInfo.cmake`.
 
 To change the application icon, replace the `*.ico` (Windows) and `*.icns` (macOS) files in the `resources` folder, setting `ICON_NAME` to the base file name (without the file extension) in `AppInfo.cmake`. The macOS utility script `macos\png2ico.sh` generates `ICO` and `ICNS` files from a `PNG`, should you need it.
 
-If developing a macOS agent (aka service/deamon) which must run without a task bar icon nor a main window, set `MACOSX_IS_AGENT` to `TRUE` in `AppInfo.cmake`.
+If developing a macOS agent (a.k.a. service or deamon) which must run without a task bar icon, set `MACOSX_IS_AGENT` to `TRUE` in `AppInfo.cmake`.
 
 Resource files who's data is needed at runtime should be placed in the `resources` folder and listed in `resources.qrc`.
 
