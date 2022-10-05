@@ -33,7 +33,7 @@ Set up the project in VSCode:
     * Clang on macOS
     * MinGW on Windows
 
-You are now ready to build, run or debug the app. After building, the app can be found in the `build` directory, however, this build is unlikely to work on other machines. To distribute the app, follow the steps in the following section.
+You are now ready to build, run or debug the app. After building, the app can be found in the `build` directory, however, this build is unlikely to work on other machines. To distribute the app, follow the steps in the 'Deployment' section below.
 
 Deployment
 ----------
