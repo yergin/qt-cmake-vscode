@@ -12,6 +12,12 @@ include(AppInfo)
 string(REPLACE " " "_" PROJ_NAME ${APP_NAME})
 project(${PROJ_NAME} VERSION ${APP_VERSION})
 set(TARGET_NAME ${PROJ_NAME})
+if (NOT PROJECT_VERSION_PATCH)
+    set(PROJECT_VERSION_PATCH 0)
+endif()
+if (NOT PROJECT_VERSION_TWEAK)
+    set(PROJECT_VERSION_TWEAK 0)
+endif()
 
 set(CMAKE_OSX_ARCHITECTURES arm64 x86_64)
 set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15")
@@ -37,7 +43,7 @@ elseif (WIN32)
     set(QT6_DIR c:/Qt/6.4.0/mingw_64)
     enable_language(RC)
     set(ICON_FILE resources/${ICON_NAME})
-    configure_file(${PROJECT_SOURCE_DIR}/windows/resources.rc.in resources.rc)
+    configure_file(${PROJECT_SOURCE_DIR}/windows/resources.rc.in resources.rc @ONLY)
     set(RESOURCE_FILES
         resources/resources.qrc
         resources.rc
