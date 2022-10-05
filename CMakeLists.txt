@@ -37,9 +37,10 @@ elseif (WIN32)
     set(QT6_DIR c:/Qt/6.4.0/mingw_64)
     enable_language(RC)
     set(ICON_FILE resources/${ICON_NAME})
+    configure_file(${PROJECT_SOURCE_DIR}/windows/resources.rc.in resources.rc)
     set(RESOURCE_FILES
         resources/resources.qrc
-        resources/resources.rc
+        resources.rc
     )
 endif()
 
@@ -64,7 +65,7 @@ set_target_properties(${TARGET_NAME} PROPERTIES
 if (APPLE)
     if (IS_AGENT)
         add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
-            COMMAND /bin/bash ${CMAKE_CURRENT_SOURCE_DIR}/scripts/macos/plist-agent.sh ${CMAKE_CURRENT_SOURCE_DIR}/build/${TARGET_NAME}.app/Contents/Info.plist
+            COMMAND /bin/bash ${CMAKE_CURRENT_SOURCE_DIR}/macos/plist-agent.sh ${CMAKE_CURRENT_SOURCE_DIR}/build/${TARGET_NAME}.app/Contents/Info.plist
         )
     endif()
 elseif(WIN32)
