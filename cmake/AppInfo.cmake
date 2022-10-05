@@ -1,5 +1,5 @@
 ##
-##  app.cmake
+##  AppInfo.cmake
 ##  qt6-cmake-vscode
 ##
 ##  Created by Gino Bollaert on 04/10/2022.

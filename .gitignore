@@ -71,6 +71,7 @@ Frameworks/
 
 # Build
 build/
+build-*/
 
 # Deliberately untracked
 _UT_*

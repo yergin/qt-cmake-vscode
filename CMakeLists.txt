@@ -6,8 +6,8 @@
 ##
 
 cmake_minimum_required(VERSION 3.24)
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
-include(app)
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(AppInfo)
 
 string(REPLACE " " "_" PROJ_NAME ${APP_NAME})
 project(${PROJ_NAME} VERSION ${APP_VERSION})
