@@ -6,7 +6,7 @@ This is intended as a template for developing distributable cross-platform Qt ap
 A word of warning
 -----------------
 
-Simply using this template does not automatically make your app compliant to Qt's LGPL requirements which you can read [here](https://www.qt.io/licensing/open-source-lgpl-obligations).
+Simply using this template does not automatically make your app compliant to Qt's LGPL requirements, which you can read about [here](https://www.qt.io/licensing/open-source-lgpl-obligations).
 
 Dev requirements
 ----------------
