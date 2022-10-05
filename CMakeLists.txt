@@ -35,9 +35,11 @@ if (APPLE)
     )
 elseif (WIN32)
     set(QT6_DIR c:/Qt/6.4.0/mingw_64)
+    enable_language(RC)
     set(ICON_FILE resources/${ICON_NAME})
     set(RESOURCE_FILES
         resources/resources.qrc
+        resources/resources.rc
     )
 endif()
 
@@ -65,4 +67,8 @@ if (APPLE)
             COMMAND /bin/bash ${CMAKE_CURRENT_SOURCE_DIR}/scripts/macos/plist-agent.sh ${CMAKE_CURRENT_SOURCE_DIR}/build/${TARGET_NAME}.app/Contents/Info.plist
         )
     endif()
+elseif(WIN32)
+    add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
+        COMMAND ${QT6_DIR}/bin/windeployqt.exe ${CMAKE_CURRENT_SOURCE_DIR}/build/${TARGET_NAME}.exe
+    )
 endif()
