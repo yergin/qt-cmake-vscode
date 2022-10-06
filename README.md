@@ -1,7 +1,7 @@
 Qt + CMake cross-platform app template for VSCode
 =================================================
 
-This is intended as a template for developing distributable cross-platform Qt desktop apps under LGPL in VSCode rather than using QtCreator. Supported platforms for deployment are Windows 10 and above and macOS 10.15+. Included is a script for code signing and notarization for macOS deploymemt. Linux deployment is not currently supported.
+This is intended as a template for developing distributable cross-platform Qt (LGPL) desktop apps in VSCode rather than using QtCreator. Supported platforms for deployment are Windows 10 and above and macOS 10.15+. Included is a script for code signing and notarization for macOS deploymemt. Linux deployment is not currently supported.
 
 A word of warning
 -----------------
