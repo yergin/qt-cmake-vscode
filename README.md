@@ -1,7 +1,7 @@
 Qt + CMake cross-platform app template for VSCode
 =================================================
 
-This is intended as a template for developing distributable cross-platform Qt apps under LGPL in VSCode rather than using QtCreator. Supported platforms for deployment are macOS 10.15+ and Windows 10 and above. Linux deployment is not currently supported.
+This is intended as a template for developing distributable cross-platform Qt apps under LGPL in VSCode rather than using QtCreator. Supported platforms for deployment are Windows 10 and above and macOS 10.15+. Included is a script for code signing and notarization for macOS deploymemt. Linux deployment is not currently supported.
 
 A word of warning
 -----------------
@@ -76,6 +76,28 @@ Code completion in VSCode should work on Windows by default. To enable code comp
         }
     ],
 ```
+
+macOS notarization
+------------------
+
+You'll need the following in order to notarize your app:
+
+* A 'Developer ID Application' certificate (https://developer.apple.com/account/resources/certificates/list)
+* Your Apple developer ID
+* An application password for your app which you can create at: https://appleid.apple.com/
+
+Create a file `.credentials` in the root folder of this repo with the following contents and fill out the corresponding information:
+```
+BUNDLE_SIGN_CERT="Developer ID Application: ___ ___ (____)"
+NOTARIZE_APPLE_ID="___@___.com"
+NOTARIZE_APP_PASS="____-____-____-____"
+```
+
+Whenever you are ready to notarize a build, run the following command after building the \[install\] target:
+
+`bash build/notarize.sh`
+
+You will be prompted to press the \[RETURN\] key when your app has been notarized. Press the key after you receive an email confiramtion so that the your app is stapled with the approval. Your notarized app will be moved into the `build\notarized` folder.
 
 Known issues
 ------------

@@ -22,7 +22,7 @@ cp -R "@DIST_APP@" "quarantine/@APP_NAME@.app"
 xcrun altool --notarize-app --primary-bundle-id "@IDENTIFIER@" -u "$NOTARIZE_APPLE_ID" -p "$NOTARIZE_APP_PASS" --file "quarantine/@APP_NAME@.app.zip"
 rm "quarantine/@APP_NAME@.app.zip"
 
-read -p "Press [RETURN] once the application has been notarized"
+read -p "Press the [RETURN] key once the application has been notarized"
 
 mv "quarantine/@APP_NAME@.app" "notarized/@APP_NAME@.app"
 xcrun stapler staple "notarized/@APP_NAME@.app"
