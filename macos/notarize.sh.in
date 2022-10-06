@@ -1,0 +1,30 @@
+#!/bin/bash
+
+##
+##  notarize.sh.in
+##  qt-cmake-vscode
+##
+##  Created by Gino Bollaert on 06/10/2022.
+##
+
+WORKING_DIR=`pwd`
+cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+source "@CMAKE_SOURCE_DIR@/.credentials"
+
+[ -d quarantine ] && rm -r quarantine
+[ -d notarized ] && rm -r notarized
+mkdir quarantine
+mkdir notarized
+
+cp -R "@DIST_APP@" "quarantine/@APP_NAME@.app"
+/usr/bin/ditto -c -k --sequesterRsrc --keepParent "quarantine/@APP_NAME@.app" "quarantine/@APP_NAME@.app.zip"
+xcrun altool --notarize-app --primary-bundle-id "@IDENTIFIER@" -u "$NOTARIZE_APPLE_ID" -p "$NOTARIZE_APP_PASS" --file "quarantine/@APP_NAME@.app.zip"
+rm "quarantine/@APP_NAME@.app.zip"
+
+read -p "Press [RETURN] once the application has been notarized"
+
+mv "quarantine/@APP_NAME@.app" "notarized/@APP_NAME@.app"
+xcrun stapler staple "notarized/@APP_NAME@.app"
+
+cd "$WORKING_DIR"

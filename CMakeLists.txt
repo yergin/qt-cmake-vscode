@@ -63,6 +63,7 @@ endforeach(LIB)
 set_target_properties(${TARGET_NAME} PROPERTIES
     WIN32_EXECUTABLE ON
     MACOSX_BUNDLE ON
+    XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME YES
 )
 
 set(BUILD_DIR ${PROJECT_SOURCE_DIR}/build)
@@ -88,6 +89,7 @@ set(DIST_APP ${DIST_DIR}/${APP_NAME}.app)
 set(CMAKE_INSTALL_PREFIX ${DIST_DIR})
 
 if (APPLE)
+    configure_file(${CMAKE_SOURCE_DIR}/macos/notarize.sh.in notarize.sh @ONLY)
     # Qt's deploy script is broken for Mac so run the command-line version instead
     configure_file(${CMAKE_SOURCE_DIR}/macos/mac-deploy.sh.in mac-deploy.sh @ONLY)
     install(SCRIPT ${CMAKE_SOURCE_DIR}/macos/PostInstall.cmake)

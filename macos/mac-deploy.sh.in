@@ -11,5 +11,18 @@
 mkdir "@DIST_DIR@"
 cp -R "@BUILT_APP@" "@DIST_DIR@"
 
-@QT6_DIR@/bin/macdeployqt "@DIST_APP@"
-ln -s ./Frameworks "@DIST_APP@/Contents/lib"
+if [ -f "@CMAKE_SOURCE_DIR@/.credentials" ]; then
+    source "@CMAKE_SOURCE_DIR@/.credentials"
+    @QT6_DIR@/bin/macdeployqt "@DIST_APP@" -codesign="$BUNDLE_SIGN_CERT"
+    for i in "@DIST_APP@/Contents/Frameworks/*"; do
+        FRAMEWORK=${i##*/}
+        NAME=${FRAMEWORK%.*}
+        LIBRARY=$APP/Contents/Frameworks/$FRAMEWORK/$NAME
+        if [ -f "$LIBRARY" ]; then
+            codesign --force --options runtime --timestamp --sign "$BUNDLE_SIGN_CERT" "$LIBRARY"
+        fi
+    done
+    codesign --force --options runtime --timestamp --sign "$BUNDLE_SIGN_CERT" "@DIST_APP@/Contents/MacOS/@TARGET_NAME@"
+else
+    @QT6_DIR@/bin/macdeployqt "@DIST_APP@"
+fi
