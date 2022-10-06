@@ -8,12 +8,12 @@ A word of warning
 
 Simply using this template does not automatically make your app compliant to Qt's LGPL requirements, which you can read about [here](https://www.qt.io/licensing/open-source-lgpl-obligations).
 
-Dev requirements
-----------------
+Dev minimum requirements
+------------------------
 
-* Windows 10 and macOS 12+ (macOS 10.15 is sufficient if deploying the app is not required)
+* Windows 10 / macOS 12 (macOS 10.15 is sufficient if deploying the app is not required)
 * Qt 6.x (L)GPL for desktop development
-* CMake 3.22
+* CMake 3.22 or above
 * VSCode with CMake Tools (Microsoft) extension installed
 
 Setting up
@@ -25,7 +25,7 @@ If you are on Windows, before following the steps below, add Qt's MinGW bin fold
 
 Set up the project in VSCode:
 
-1. Open VSCode and select "Open Folder..." from the file menu.
+1. Open VSCode and select 'Open Folder...' from the 'File' menu.
 2. Select the root folder of this repo.
 3. Respond with 'Yes' to configuring the project with CMake.
 4. Check the paths in `cmake/Qt.cmake` and change them to match your Qt's installation folder.
@@ -59,4 +59,5 @@ Know issues
 -----------
 
 * Code auto-completion does not work by default in VSCode.
+* Spaces in the app name are replaced with underscores '_' in order for Qt's deployment tools to work. You'll need to manually rename the application file after deployment if you want to retain the spaces in its name.
 * Certain app information such as the company name or copyright does not appear in the Windows executable file properties.
