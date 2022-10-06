@@ -44,7 +44,7 @@ Deployment
 
 The `build/dist` folder will contain the distributable app.
 
-Customising the app
+Customizing the app
 -------------------
 
 Set your application name, version, source files and other information in `cmake/AppInfo.cmake`.
