@@ -8,8 +8,8 @@ A word of warning
 
 Simply using this template does not automatically make your app compliant to Qt's LGPL requirements, which you can read about [here](https://www.qt.io/licensing/open-source-lgpl-obligations).
 
-Dev minimum requirements
-------------------------
+Development minimum requirements
+--------------------------------
 
 * Windows 10 / macOS 12 (macOS 10.15 is sufficient if deploying the app is not required)
 * Qt 6.x (L)GPL for desktop development
