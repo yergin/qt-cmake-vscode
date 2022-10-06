@@ -1,4 +1,5 @@
 <RCC version="1.0">
-	<qresource prefix="images/">
+	<qresource prefix="Qt/">
+		<file alias="LICENSE">../build/LICENSE</file>
 	</qresource>
 </RCC>

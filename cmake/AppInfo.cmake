@@ -18,6 +18,7 @@ set(MACOSX_IS_AGENT FALSE)
 
 set(SOURCE_FILES
     src/main.cpp
+    src/MainWindow.cpp
 )
 
 set(QT_COMPONENTS Widgets Gui Core)

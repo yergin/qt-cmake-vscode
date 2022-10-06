@@ -67,6 +67,8 @@ set_target_properties(${TARGET_NAME} PROPERTIES
 
 set(BUILD_DIR ${PROJECT_SOURCE_DIR}/build)
 
+file(COPY ${QT6_DIR}/../../Licenses/LICENSE DESTINATION ${BUILD_DIR})
+
 if (APPLE)
     if (MACOSX_IS_AGENT)
         add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
