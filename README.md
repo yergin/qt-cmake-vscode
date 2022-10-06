@@ -58,7 +58,7 @@ Resource files who's data is needed at runtime should be placed in the `resource
 Code completion
 ---------------
 
-To enable code completion in VSCode on macOS, set up the following configuration in `.vscode/c_cpp_properties.json`:
+Code completion in VSCode should work on Windows by default. To enable code completion on macOS, set up the following configuration in `.vscode/c_cpp_properties.json`:
 ```json
     "configurations": [
         {
