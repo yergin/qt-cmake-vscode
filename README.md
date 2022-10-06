@@ -55,9 +55,30 @@ If developing a macOS agent (a.k.a. service or deamon) which must run without a 
 
 Resource files who's data is needed at runtime should be placed in the `resources` folder and listed in `resources.qrc`.
 
+Code completion
+---------------
+
+To enable code completion in VSCode on macOS, set up the following configuration in `.vscode/c_cpp_properties.json`:
+```json
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}"
+            ],
+            "defines": [],
+            "macFrameworkPath": ["/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks"],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "${default}",
+            "configurationProvider": "ms-vscode.cmake-tools"
+        }
+    ],
+```
+
 Know issues
 -----------
 
-* Code auto-completion does not work by default in VSCode.
 * Spaces in the app name are replaced with underscores '_' in order for Qt's deployment tools to work. You'll need to manually rename the application file after deployment if you want to retain the spaces in its name.
 * Certain app information such as the company name or copyright does not appear in the Windows executable file properties.
