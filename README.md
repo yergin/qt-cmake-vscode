@@ -49,7 +49,7 @@ Customising the app
 
 Set your application name, version, source files and other information in `cmake/AppInfo.cmake`.
 
-To change the application icon, replace the `*.ico` (Windows) and `*.icns` (macOS) files in the `resources` folder, setting `ICON_NAME` to the base file name (without the file extension) in `AppInfo.cmake`. The macOS utility script `macos\png2ico.sh` generates `ICO` and `ICNS` files from a `PNG`, should you need it. There are many online tools which convert uploaded images into icons, such as [this one](https://redketchup.io/icon-converter).
+To change the application icon, replace the `*.ico` (Windows) and `*.icns` (macOS) files in the `resources` folder, setting `ICON_NAME` to the base file name (without the file extension) in `AppInfo.cmake`. The macOS utility script `macos/png2ico.sh` generates `ICO` and `ICNS` files from a `PNG`, should you need it. There are many online tools which convert uploaded images into icons, such as [this one](https://redketchup.io/icon-converter).
 
 If developing a macOS agent (a.k.a. service or deamon) which must run without a task bar icon, set `MACOSX_IS_AGENT` to `TRUE` in `AppInfo.cmake`.
 
@@ -97,7 +97,7 @@ Whenever you are ready to notarize a build, run the following command after buil
 
 `bash build/notarize.sh`
 
-You will be prompted to press the \[RETURN\] key when your app has been notarized. Press the key after you receive an email confiramtion so that the your app is stapled with the approval. Your notarized app will be moved into the `build\notarized` folder.
+You will be prompted to press the \[RETURN\] key when your app has been notarized. Press the key after you receive an email confiramtion so that the your app is stapled with the approval. Your notarized app will be moved into the `build/notarized` folder.
 
 Known issues
 ------------
