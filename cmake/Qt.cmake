@@ -1,6 +1,6 @@
 ##
 ##  Qt.cmake
-##  qt6-cmake-vscode
+##  qt-cmake-vscode
 ##
 ##  Created by Gino Bollaert on 05/10/2022.
 ##

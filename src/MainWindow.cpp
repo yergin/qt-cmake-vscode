@@ -1,6 +1,6 @@
 /**
  *  MainWindow.cpp
- *  qt6-cmake-vscode
+ *  qt-cmake-vscode
  *
  *  Created by Gino Bollaert on 06/10/2022.
  */
