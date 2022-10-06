@@ -77,8 +77,8 @@ To enable code completion in VSCode on macOS, set up the following configuration
     ],
 ```
 
-Know issues
------------
+Known issues
+------------
 
 * Spaces in the app name are replaced with underscores '_' in order for Qt's deployment tools to work. You'll need to manually rename the application file after deployment if you want to retain the spaces in its name.
 * Certain app information such as the company name or copyright does not appear in the Windows executable file properties.
